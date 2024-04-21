@@ -12,6 +12,10 @@
 }
 
 .footer {
+  position: absolute;
   width: 100%;
+  max-width: 1280px;
   height: 100px;
+  bottom: 0;
+  
 }

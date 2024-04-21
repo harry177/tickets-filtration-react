@@ -5,13 +5,17 @@ import "./render-field.css";
 
 export const RenderField = () => {
   const [currency, setCurrency] = useState<string>("RUB");
+  const [stops, setStops] = useState<string[]>([]);
   const handleCurrency = (cur: string) => {
     setCurrency(cur);
   }
+  const handleStops = (stops: string[]) => {
+    setStops(stops);
+  }
   return (
     <main className="main">
-      <FilterBlock dispatchCurrency={handleCurrency}/>
-      <TicketBlock currency={currency}/>
+      <FilterBlock dispatchCurrency={handleCurrency} dispatchStops={handleStops}/>
+      <TicketBlock currency={currency} stops={stops} />
     </main>
   );
 };

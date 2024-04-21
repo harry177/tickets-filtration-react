@@ -25,3 +25,9 @@
   font-weight: 600;
   margin-top: 0;
 }
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

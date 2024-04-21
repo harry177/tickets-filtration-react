@@ -15,7 +15,7 @@ export const CurrencyTabs = ({dispatchCurrency}: CurrencyTabsProps) => {
     useEffect(() => {
         dispatchCurrency(tab);
     })
-    return <div className="tabs-container">
+    return <div className="tabs">
         <div className={`currency-tab ${tab === "RUB" ? "tab-active" : "tab-inactive"}`} onClick={handleTabClick}>RUB</div>
         <div className={`currency-tab ${tab === "USD" ? "tab-active" : "tab-inactive"}`} onClick={handleTabClick}>USD</div>
         <div className={`currency-tab ${tab === "EUR" ? "tab-active" : "tab-inactive"}`} onClick={handleTabClick}>EUR</div>
