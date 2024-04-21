@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { dateTransformer } from "../../utils/dateTransformer";
 import { logoRetriever } from "../../utils/logoRetriewer";
+import { rateFetcher } from "../../utils/rateFetcher";
 import "./ticket.css";
 
 interface TicketProps {
@@ -16,9 +18,23 @@ interface TicketProps {
     stops: number;
     price: number;
   };
+  currency: string;
 }
 
-export const Ticket = ({ content }: TicketProps) => {
+export const Ticket = ({ content, currency }: TicketProps) => {
+  const [priceCurrency, setPriceCurrency] = useState<{
+    rate: number;
+    symbol: string;
+  }>({ rate: 1, symbol: "₽" });
+
+  useEffect(() => {
+    const fetchCurrency = async () => {
+      const currencyData = await rateFetcher(currency);
+      setPriceCurrency(currencyData);
+    };
+    fetchCurrency();
+  }, [currency]);
+
   return (
     <div className="ticket">
       <div className="ticket-left">
@@ -29,7 +45,10 @@ export const Ticket = ({ content }: TicketProps) => {
         ></img>
         <button className="buy-button">
           Купить за <br />
-          {content.price} ₽
+          {priceCurrency.symbol !== "₽"
+            ? (content.price / priceCurrency.rate).toFixed(2)
+            : content.price}{" "}
+          {priceCurrency.symbol}
         </button>
       </div>
       <div className="ticket-right">

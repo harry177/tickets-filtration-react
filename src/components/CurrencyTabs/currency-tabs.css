@@ -1,0 +1,47 @@
+.tabs-container {
+  display: flex;
+  width: 100%;
+}
+
+.currency-tab {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33.33%;
+  height: 50px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tab-inactive {
+  color: rgba(66, 135, 245, 1);
+  background-color: white;
+  border: 1px solid #e9ecf2;
+  z-index: 0;
+}
+
+.tab-inactive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: -1;
+  transition: background-color 0.3s ease;
+}
+
+.tab-inactive:hover::before {
+  background-color: rgba(66, 135, 245, 0.15);
+  border: 1px solid rgba(66, 135, 245, 1);
+  border-radius: 3px;
+  z-index: 5;
+}
+
+.tab-active {
+  color: white;
+  background-color: rgba(66, 135, 245, 1);
+  outline: 1px solid rgba(66, 135, 245, 1);
+}
