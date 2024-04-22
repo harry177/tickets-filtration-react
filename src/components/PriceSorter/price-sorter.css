@@ -1,0 +1,39 @@
+.sorter-label {
+ display: flex;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.sorter-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sorter-label .sorter-text:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(66, 135, 245, 1);
+  border-radius: 50%;
+}
+
+.sorter-label input[type="radio"]:checked + .sorter-text:before {
+  background-color: transparent;
+}
+
+.sorter-label input[type="radio"]:checked + .sorter-text:after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(66, 135, 245, 1);
+  border-radius: 50%;
+}

@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { CurrencyTabs } from "../CurrencyTabs/CurrencyTabs";
 import { StopFilter } from "../StopFilter/StopFilter";
+import { PriceSorter } from "../PriceSorter/PriceSorter";
 import storage from "../../../tickets.json";
 import "./filter-block.css";
 
 interface FilterBlockProps {
   dispatchCurrency: (cur: string) => void;
   dispatchStops: (stops: string[]) => void;
+  dispatchSorting: (option: string) => void;
 }
 
-export const FilterBlock = ({ dispatchCurrency, dispatchStops }: FilterBlockProps) => {
+export const FilterBlock = ({ dispatchCurrency, dispatchStops, dispatchSorting }: FilterBlockProps) => {
   const [selectedStops, setSelectedStops] = useState<string[]>(["all", "0", "1", "2", "3"]);
   const forwardCurrency = (cur: string) => {
     dispatchCurrency(cur);
   };
+  const forwardSorting = (option: string) => {
+    dispatchSorting(option);
+  }
 
   const stops = [
     ...new Set(storage.tickets.map((item) => item.stops).sort((a, b) => a - b)),
@@ -53,6 +58,12 @@ export const FilterBlock = ({ dispatchCurrency, dispatchStops }: FilterBlockProp
         {stops.map((item, index) => {
           return <StopFilter key={index} id={item.toString()} dispatchChange={stopsHandleChange} updater={selectedStops} />
         })}
+      </div>
+      <div className="filter-container">
+        <p className="filter-header">сортировка по цене</p>
+        <div className="filters">
+          <PriceSorter dispatchSorting={forwardSorting}/>
+        </div>
       </div>
     </div>
   );
